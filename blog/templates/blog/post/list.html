@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% block title %}My Blog{% endblock %}
+{% block content %}
+<div class="w3-container w3-margin-right">
+    <h1>
+        <b>
+        MY BLOG
+        </b>
+    </h1>
+    <hr>
+    {% for post in posts %}
+    <h2 class="w3-text-blue">
+        <a href="{{ post.get_absolute_url }}">
+        {{ post.title }}
+        </a>
+    </h2>
+    <p class="date w3-cursive">
+        Published 
+        {{ post.publish }} by {{ post.author }}
+    </p>
+    <p class="w3-large">
+    {{ post.body|truncatewords:30|linebreaks }}
+    </p>
+     {% endfor %}
+</div>
+    
+{% endblock %}

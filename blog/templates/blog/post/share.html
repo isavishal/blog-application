@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+
+{% block title %}Share a post{% endblock %}
+{% block content %}
+<div class="w3-container w3-margin-right">
+{% if sent %}
+<h1>E-mail successfully sent</h1>
+<p>
+"{{ post.title }}" was successfully sent to {{ form.cleaned_data.to }}.
+</p>
+{% else %}
+<h1><b>Share "{{ post.title }}" by e-mail</b></h1>
+<form action="." method="post">
+{{ form.as_p }}
+{% csrf_token %}
+<p><button class="w3-button w3-blue" input type="submit" >Send e-mail</button></p>
+</form>
+</div>
+{% endif %}
+
+{% endblock %}

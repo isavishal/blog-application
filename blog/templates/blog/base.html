@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+
+        .sidenav {
+          width: 130px;
+          position: fixed;
+          z-index: 1;
+          top: 20px;
+          right: 10px;
+          background: #eee;
+          overflow-x: hidden;
+          padding: 8px 0;
+        }
+        
+        .sidenav a {
+          padding: 6px 8px 6px 16px;
+          text-decoration: none;
+          font-size: 18px;
+          color: #2196F3;
+          display: block;
+        }
+        
+        .sidenav a:hover {
+          color: #064579;
+        }
+        
+        .main {
+          margin-right: 140px; /* Same width as the sidebar + left position in px */
+          font-size: 18px; /* Increased text to enable scrolling */
+          padding: 0px 10px;
+        }
+        
+        @media screen and (max-height: 450px) {
+          .sidenav {padding-top: 15px;}
+          .sidenav a {font-size: 18px;}
+        }
+        </style>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+ 
+<div id="content" class="main">
+{% block content %}
+    {% include "pagination.html" with page=posts %}
+{% endblock %}
+<div class="w3-col l2 m12" id="right">
+<div class="sidenav">
+<h2><b>My blog</b></h2>
+<p>This is my blog.</p>
+</div>
+</div>
+</body>
+</html>

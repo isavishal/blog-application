@@ -1,0 +1,45 @@
+{% extends "blog/base.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<div class="w3-container w3-margin-right">
+<h1><b>{{ post.title }}</b></h1>
+<hr style="width:100%;text-align:left;margin-left:0">
+<p class="date w3-cursive">
+Published {{ post.publish }} by {{ post.author }}
+</p>
+<p class="w3-text-blue w3-sans-serif">
+    <a href="{% url "blog:post_share" post.id %}">
+        Share this post
+    </a>
+</p>
+<p class="w3-large">
+{{ post.body|linebreaks }}
+</p>
+{% with comments.count as total_comments %}
+<h2>
+{{ total_comments }} comment{{ total_comments|pluralize }}
+</h2>
+{% endwith %}
+{% for comment in comments %}
+<div class="comment">
+<p class="info">
+Comment {{ forloop.counter }} by {{ comment.name }}
+{{ comment.created }}
+</p>
+{{ comment.body|linebreaks }}
+</div>
+{% empty %}
+<p>There are no comments yet.</p>
+{% endfor %}
+{% if new_comment %}
+<h2>Your comment has been added.</h2>
+{% else %}
+<h2>Add a new comment</h2>
+<form action="." method="post">
+{{ comment_form.as_p }}
+{% csrf_token %}
+<p><button class="w3-button w3-blue" input type="submit" >Add comment</button></p>
+</form>
+</div>
+{% endif %}
+{% endblock %}
